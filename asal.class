@@ -1,0 +1,72 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        ArrayList<Integer> asalSayilar = new ArrayList<>();
+        ArrayList<Integer> asalOlmayanlar = new ArrayList<>();
+
+        int asalSayac = 0;
+        int asalOlmayanSayac = 0;
+        int toplamAsal = 0;
+        int toplamAsalOlmayan = 0;
+
+        for (int i = 0; i < 20; i++) {
+            System.out.print((i + 1) + ". sayıyı girin: ");
+            if (scanner.hasNextInt()) {
+                int sayi = scanner.nextInt();
+                if (sayi > 0) {
+                    if (isAsal(sayi)) {
+                        asalSayilar.add(sayi);
+                        asalSayac++;
+                        toplamAsal += sayi;
+                    } else {
+                        asalOlmayanlar.add(sayi);
+                        asalOlmayanSayac++;
+                        toplamAsalOlmayan += sayi;
+                    }
+                } else {
+                    System.out.println("Pozitif bir sayı giriniz.");
+                    i--;
+                }
+            } else {
+                System.out.println("Geçersiz giriş. Sayı giriniz.");
+                scanner.next(); // Geçersiz girişi temizle
+                i--;
+            }
+        }
+
+        // Asal sayıları büyükten küçüğe sırala ve yazdır
+        System.out.println("Asal Sayılar:");
+        asalSayilar.sort((a, b) -> b - a);
+        for (int sayi : asalSayilar) {
+            System.out.print(sayi + " ");
+        }
+        System.out.println("\nToplam Asal Sayı: " + toplamAsal);
+        System.out.println("Asal Sayıların Ortalaması: " + (toplamAsal / (double) asalSayac));
+
+        // Asal olmayanları büyükten küçüğe sırala ve yazdır
+        System.out.println("\nAsal Olmayan Sayılar:");
+        asalOlmayanlar.sort((a, b) -> b - a);
+        for (int sayi : asalOlmayanlar) {
+            System.out.print(sayi + " ");
+        }
+        System.out.println("\nToplam Asal Olmayan Sayı: " + toplamAsalOlmayan);
+        System.out.println("Asal Olmayan Sayıların Ortalaması: " + (toplamAsalOlmayan / (double) asalOlmayanSayac));
+    }
+
+    // Bir sayının asal olup olmadığını kontrol eden fonksiyon
+    public static boolean isAsal(int sayi) {
+        if (sayi <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(sayi); i++) {
+            if (sayi % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
