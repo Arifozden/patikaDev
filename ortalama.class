@@ -1,0 +1,45 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int[] sayilar = new int[20];
+
+        // Kullanıcıdan 20 sayı al
+        for (int i = 0; i < 20; i++) {
+            System.out.print((i + 1) + ". sayıyı girin: ");
+            sayilar[i] = scanner.nextInt();
+        }
+
+        // Sayıları küçükten büyüğe sırala
+        Arrays.sort(sayilar);
+
+        // En küçük 3 sayı
+        int[] enKucukler = Arrays.copyOfRange(sayilar, 0, 3);
+        // En büyük 3 sayı
+        int[] enBuyukler = Arrays.copyOfRange(sayilar, 17, 20);
+
+        // En küçüklerin ortalaması
+        double ortalamaEnKucukler = 0;
+        for (int sayi : enKucukler) {
+            ortalamaEnKucukler += sayi;
+        }
+        ortalamaEnKucukler /= 3;
+
+        // En büyüklerin ortalaması
+        double ortalamaEnBuyukler = 0;
+        for (int sayi : enBuyukler) {
+            ortalamaEnBuyukler += sayi;
+        }
+        ortalamaEnBuyukler /= 3;
+
+        // Sonuçları yazdır
+        System.out.println("En Küçük 3 Sayı: " + Arrays.toString(enKucukler));
+        System.out.println("En Büyük 3 Sayı: " + Arrays.toString(enBuyukler));
+        System.out.println("En Küçüklerin Ortalaması: " + ortalamaEnKucukler);
+        System.out.println("En Büyüklerin Ortalaması: " + ortalamaEnBuyukler);
+        System.out.println("Ortalama Toplam: " + (ortalamaEnKucukler + ortalamaEnBuyukler));
+    }
+}
